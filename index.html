@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Savanna Premium Cider - Experience the crisp refreshing taste of South Africa's iconic premium cider.">
+    <meta name="keywords" content="Savanna, Premium Cider, South Africa, Refreshing, Lemon Slice, Iconic Cider">
+    <title>Savanna Premium Cider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            /* Rich vibrant yellow background matching official brand tone */
+            background-color: #f2c710;
+            background: radial-gradient(circle at 50% 30%, #ffd62e 0%, #f2c710 60%, #e0b400 100%);
+            color: #003d1b;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Subtle glass condensation overlay texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px), radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 50px;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .navbar .logo img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+            mix-blend-mode: multiply; 
+            transition: transform 0.3s ease;
+        }
+
+        .navbar .logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .navbar nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar nav a {
+            color: #003d1b;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar nav a:hover {
+            color: #fff;
+        }
+
+        .signup-btn {
+            background: #003d1b;
+            color: #fff;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-left: 15px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .signup-btn:hover {
+            background: #002510;
+            transform: scale(1.05);
+        }
+
+        /* --- Main Animation Wrapper --- */
+        #smooth-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        #smooth-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scroll-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 50px 50px 50px;
+            overflow: hidden;
+            visibility: hidden; 
+        }
+
+        #hero-section {
+            visibility: visible;
+        }
+
+        .bg-text-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 8vw; 
+            font-size: 8.5vw; 
+            font-weight: 900;
+            letter-spacing: -2px;
+            white-space: nowrap; 
+            pointer-events: none;
+            z-index: 1;
+            color: #003d1b;
+        }
+
+        .animation-layer {
+            position: fixed; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .bottle-group {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            width: 100%;
+            transform-origin: center center;
+        }
+
+        .main-bottle {
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 25px 35px rgba(0,0,0,0.3));
+            transform-origin: center center;
+        }
+
+        .lemon {
+            position: absolute;
+            width: 150px;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+        .lemon-1 { top: 15%; left: 30%; }
+        .lemon-2 { bottom: 15%; right: 30%; }
+
+        /* --- Official White Brush-Stroke Banners --- */
+        .brush-banner {
+            background: #ffffff;
+            color: #003d1b;
+            padding: 25px 45px;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px; /* Organic brush shape edge */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+            transform: rotate(-1.5deg);
+            display: inline-block;
+        }
+
+        /* --- Section 2 Centered Character & Right White Board --- */
+        #flavour-section {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        /* Character centered in middle background */
+        .sec2-character {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            height: 95vh;
+            object-fit: contain;
+            z-index: 8;
+            mix-blend-mode: screen; 
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .content-box {
+            max-width: 520px;
+            z-index: 10;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+        
+        .content-box h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #003d1b;
+        }
+        
+        .content-box p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            font-weight: 700;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1100px;
+            z-index: 10;
+        }
+
+        .product-card {
+            background: #fff;
+            color: #000;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            width: 30%;
+            height: 540px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+            opacity: 0;
+            transform: translateY(150px);
+        }
+
+        .card-image {
+            height: 60%;
+            object-fit: contain;
+            margin-bottom: 15px;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .product-card:hover .card-image {
+            transform: scale(1.08) rotate(4deg);
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            color: #003d1b;
+        }
+
+        .buy-btn {
+            background: #003d1b;
+            color: #fff;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s ease;
+        }
+
+        .buy-btn:hover {
+            background: #f2c710;
+            color: #003d1b;
+        }
+
+        /* --- Section 4 Framing --- */
+        #about-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .side-bottle {
+            position: absolute;
+            top: 50%;
+            height: 90vh;
+            max-width: 25vw;
+            object-fit: contain;
+            z-index: 5;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        /* Anchored to extreme left margin */
+        .side-bottle-left {
+            left: -1%;
+            transform: translateY(-50%) translateX(-120px);
+        }
+
+        /* Anchored to extreme right margin */
+        .side-bottle-right {
+            right: -1%;
+            transform: translateY(-50%) translateX(120px);
+        }
+
+        /* Main content pinned above background images */
+        .about-section-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            z-index: 25;
+            max-width: 680px;
+        }
+
+        .about-section-title {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .about-grid {
+            display: flex;
+            gap: 25px;
+            width: 100%;
+        }
+
+        .about-col {
+            flex: 1;
+            padding: 26px;
+        }
+        
+        .about-col h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            font-weight: 900;
+            color: #003d1b;
+        }
+        
+        .about-col p {
+            line-height: 1.55;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        /* --- Section 5 Developer Video Showcase --- */
+        .video-showcase-section {
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            background-color: #08170d;
+            color: #fff;
+            position: relative;
+            z-index: 10;
+        }
+
+        .video-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .video-header h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #f2c710;
+            margin-bottom: 10px;
+        }
+
+        .video-header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            max-width: 1080px;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+            background: #000;
+            border: 2px solid rgba(242, 199, 16, 0.4);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- Official Savanna Footer & #NO 18 Banner --- */
+        footer {
+            background-color: #ffffff;
+            color: #003d1b;
+            padding: 25px 40px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 2px solid #e5e5e5;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .compliance-banner {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .no-18-logo {
+            display: flex;
+            align-items: center;
+            font-weight: 900;
+            font-size: 2rem;
+            color: #d90429;
+            letter-spacing: -1px;
+        }
+
+        .no-18-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 3px solid #d90429;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 900;
+            margin-left: 2px;
+        }
+
+        .aware-org {
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #333;
+            text-decoration: none;
+            border-left: 1px solid #ccc;
+            padding-left: 15px;
+        }
+
+        footer p.legal-notice {
+            font-size: 0.95rem;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="#home" class="logo">
+            <img src="916169ed-99b5-4a61-98f5-a34520ec7eb9.png" alt="Savanna Premium Cider Logo">
+        </a>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#flavour-section">Meet Savanna</a>
+            <a href="#products-section">Campaigns</a>
+            <a href="#about-section">Talk Of The Town</a>
+            <button class="signup-btn">Join Savivis</button>
+        </nav>
+    </header>
+
+    <div class="animation-layer">
+        <div class="bottle-group">
+            <img src="image_edf080a5_103055.png" alt="Savanna Cider Bottle" class="main-bottle">
+            <img src="cat-lemons-slices.png" alt="Lemon Slice" class="lemon lemon-1">
+            <img src="cat-lemons-slices.png" alt="Lemon Slice" class="lemon lemon-2">
+        </div>
+    </div>
+
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- Section 1 -->
+            <section id="hero-section" class="scroll-section">
+                <div class="bg-text-container">
+                    <h1 class="side-text left-text">SAVA</h1>
+                    <h1 class="side-text right-text">NNA</h1>
+                </div>
+            </section>
+
+            <!-- Section 2: Middle Character + Right White Board -->
+            <section id="flavour-section" class="scroll-section">
+                <img src="550c8484-459f-4899-b39e-035858238025.png" alt="Savanna Man in Yellow" class="sec2-character">
+                <div class="content-box brush-banner">
+                    <h2>You're looking at the #1 cider in the world</h2>
+                    <p>Thank you South Ahh! Crisp, refreshing, and best served with a legendary lemon slice placed right in the neck.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Campaign Products -->
+            <section id="products-section" class="scroll-section">
+                <div class="card-container">
+                    <div class="product-card">
+                        <img src="37f62384-0fc4-42b7-8b9f-3e548ad20750_103313.png" alt="Savanna Dark" class="card-image">
+                        <h3>Savanna Dark</h3>
+                        <button class="buy-btn">Buy Now</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="image_edf080a5_103055.png" alt="Savanna Premium Dry" class="card-image">
+                        <h3>Savanna Dry</h3>
+                        <button class="buy-btn">Buy Now</button>
+                    </div>
+                    <div class="product-card">
+                        <img src="4b9282ba-4824-4db8-b656-8c4d9ead3a3b_105024.png" alt="Savanna Angry Lemon" class="card-image">
+                        <h3>Angry Lemon</h3>
+                        <button class="buy-btn">Buy Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Talk Of The Town -->
+            <section id="about-section" class="scroll-section">
+                <img src="7153fe0f-fdc7-42cb-8f70-752a0915eb24.png" alt="Savanna Left Character" class="side-bottle side-bottle-left">
+                <img src="aab8bf16-4735-40f4-9690-2e62e22bc126.png" alt="Savanna Right Character" class="side-bottle side-bottle-right">
+
+                <div class="about-section-content">
+                    <h2 class="about-section-title brush-banner">It's dry, but you can drink it.</h2>
+                    <div class="about-grid">
+                        <div class="about-col brush-banner">
+                            <h3>History of Savanna</h3>
+                            <p>Savanna rewrote the rules of premium cider by introducing a distinctly witty dry character to cider lovers globally.</p>
+                        </div>
+                        <div class="about-col brush-banner">
+                            <h3>Savanna's Global Reach</h3>
+                            <p>From Cape Town shores to tables worldwide, the legendary serving ritual of popping a fresh lemon wedge into the bottle neck brings smiles everywhere.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Section 5: Showcase Video -->
+    <section class="video-showcase-section">
+        <div class="video-header">
+            <h2>COMEDY NIGHT</h2>
+            <p><b>26 September 2026 is your Date with Savanna Comedy Night</b></p>
+        </div>
+        <div class="video-wrapper">
+            <video src="A_very_REAL,_not_fake_press_conference(240p).mp4" autoplay loop muted controls></video>
+        </div>
+    </section>
+
+    <!-- Official Savanna Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="compliance-banner">
+                <div class="no-18-logo">
+                    #NO<div class="no-18-circle">18</div>
+                </div>
+                <a href="https://aware.org.za" target="_blank" class="aware-org">aware<span style="color:#d90429;">!</span>org</a>
+            </div>
+            <p class="legal-notice">DRINK RESPONSIBLY. NOT FOR PERSONS UNDER THE AGE OF 18.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & Lenis Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+
+    <script>
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time)=>{
+            lenis.raf(time * 1000);
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // INITIAL SETTINGS FIX: Hide Sections 2, 3, 4 until triggered
+        gsap.set(["#flavour-section", "#products-section", "#about-section"], { autoAlpha: 0 });
+
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#smooth-wrapper",
+                start: "top top",
+                end: "+=3200", 
+                scrub: 1,
+                pin: true
+            }
+        });
+
+        // SECTION 1 -> SECTION 2
+        tl.to({}, {duration: 0.5}) 
+          .set("#flavour-section", { autoAlpha: 1 }) 
+          .to(".left-text", { xPercent: -100, opacity: 0, duration: 2, ease: "power2.out" }, ">")
+          .to(".right-text", { xPercent: 100, opacity: 0, duration: 2, ease: "power2.out" }, "<")
+          .to(".main-bottle", { 
+              scale: 0.82, 
+              xPercent: -60, 
+              rotation: -22, 
+              duration: 2.2,
+              ease: "power1.inOut" 
+          }, "<")
+          .to(".lemon-1", { xPercent: -140, yPercent: 40, rotation: 65, duration: 2 }, "<")
+          .to(".lemon-2", { xPercent: -80, yPercent: -40, rotation: -70, duration: 2 }, "<")
+          .fromTo(".sec2-character", { opacity: 0, xPercent: -100 }, { opacity: 1, xPercent: 0, duration: 2, ease: "power2.out" }, "<")
+          .fromTo(".content-box", { opacity: 0, xPercent: 100 }, { opacity: 1, xPercent: 0, duration: 2, ease: "power2.out" }, "<");
+
+        // SECTION 2 -> SECTION 3
+        tl.to(".sec2-character", { opacity: 0, xPercent: -100, duration: 1.5, ease: "power2.in" })
+          .to(".content-box", { opacity: 0, xPercent: 100, duration: 1.5, ease: "power2.in" }, "<")
+          .set("#flavour-section", { autoAlpha: 0 }) 
+          .set("#products-section", { autoAlpha: 1 }) 
+          .to(".animation-layer", { autoAlpha: 0, duration: 1.5 }, "<")
+          .to(".product-card", { 
+              opacity: 1, 
+              translateY: 0, 
+              stagger: 0.25, 
+              duration: 2.5,
+              ease: "back.out(1.2)" 
+          }, "-=0.5");
+
+        // SECTION 3 -> SECTION 4
+        tl.to(".card-container", { opacity: 0, yPercent: -50, duration: 1.5 })
+          .set("#products-section", { autoAlpha: 0 })
+          .set("#about-section", { autoAlpha: 1 })
+          .to(".side-bottle-left", { 
+              opacity: 1, 
+              x: 0, 
+              duration: 2, 
+              ease: "power2.out" 
+          }, "<")
+          .to(".side-bottle-right", { 
+              opacity: 1, 
+              x: 0, 
+              duration: 2, 
+              ease: "power2.out" 
+          }, "<")
+          .to(".about-section-content", { opacity: 1, translateY: 0, duration: 2, ease: "power2.out" }, "<");
+    </script>
+</body>
+</html>
